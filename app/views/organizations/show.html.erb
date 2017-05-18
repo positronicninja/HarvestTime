@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @organization.name %>
+</p>
+
+<p>
+  <strong>Base uri:</strong>
+  <%= @organization.base_uri %>
+</p>
+
+<p>
+  <strong>Full domain:</strong>
+  <%= @organization.full_domain %>
+</p>
+
+<p>
+  <strong>Harvest OAuth Client ID:</strong>
+  <%= @organization.harvest_id %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @organization.active %>
+</p>
+
+<%= link_to 'Edit', edit_organization_path(@organization) %> |
+<%= link_to 'Back', organizations_path %>
