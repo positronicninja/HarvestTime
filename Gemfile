@@ -41,6 +41,17 @@ group :development, :test do
   gem 'selenium-webdriver'
   # Use Rspec for test framework
   gem 'rspec-rails'
+
+  # Pry gems for debugging
+  gem 'pry-rails'
+  gem 'pry-doc'
+  gem 'pry-nav'
+
+  # Development tools for debugging, profiling, &  linting
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'rack-mini-profiler'
+  gem 'rubocop'
 end
 
 group :development do
