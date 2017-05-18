@@ -13,4 +13,6 @@
 //= require jquery
 //= require rails-ujs
 //= require turbolinks
-//= require_tree .
+//
+// Alternatively require the concatenated bootstrap for faster compilation.
+//= require bootstrap-sprockets
