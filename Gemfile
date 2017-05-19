@@ -39,6 +39,8 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Harvested gem for api access
 gem 'harvested'
+# Use Figaro gem on ENV variables
+gem 'figaro'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
