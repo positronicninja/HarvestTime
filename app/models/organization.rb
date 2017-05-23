@@ -1,4 +1,7 @@
 class Organization < ApplicationRecord
+  has_many :projects
+  has_many :staff
+
   def harvesting
     @harvesting ||= connect_to_api
   end
