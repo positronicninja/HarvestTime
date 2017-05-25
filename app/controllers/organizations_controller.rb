@@ -42,13 +42,14 @@ class OrganizationsController < ApplicationController
   def update
     respond_to do |format|
       if params[:organization] && @organization.update(organization_params)
+        @organization.update_via_api
         format.html { redirect_to @organization, notice: 'Organization was successfully updated.' }
         format.json { render :show, status: :ok, location: @organization }
       elsif @organization.errors.any?
         format.html { render :edit }
         format.json { render json: @organization.errors, status: :unprocessable_entity }
       else
-        @organization.update_via_api
+        @organization.update_projects_from_api
         format.html { redirect_to organizations_path, notice: 'Fetching Projects from Harvest.' }
         format.json { render :show, status: :ok, location: @organization }
       end
