@@ -2,12 +2,14 @@ class Project < ApplicationRecord
   has_many :entries, dependent: :destroy
   has_many :staff, -> { distinct.group 'organization_id' }, through: :entries
   belongs_to :organization
+  belongs_to :collaboration
 
   def self.update_data_for_project(data: nil, org: nil)
     raise 'Missing Harvest Project Data' if data.nil? || org.nil?
     project = find_or_create_by(organization: org,
                                 harvest_id:   data[:id]) do |new_project|
       new_project.name = data[:name]
+      new_project.collaboration = Collaboration.find_or_create_by(name: data[:name])
     end
     project.update_data_from_api(data)
   end
