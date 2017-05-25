@@ -16,8 +16,8 @@ class ProjectsController < ApplicationController
   # PATCH/PUT /projects/1.json
   def update
     respond_to do |format|
-      if @project.update(project_params)
-        format.html { redirect_to @project, notice: 'Project was successfully updated.' }
+      if @project.update_data_from_api
+        format.html { redirect_to @project, notice: 'Fetching Project data from Harvest.' }
         format.json { render :show, status: :ok, location: @project }
       else
         format.html { render :edit }
@@ -40,10 +40,5 @@ class ProjectsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_project
       @project = Project.find(params[:id])
-    end
-
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def project_params
-      params.require(:project).permit(:name, :active, :organization_id, :harvest_id, :harvest_created_at, :harvest_updated_at)
     end
 end
