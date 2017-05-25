@@ -28,17 +28,11 @@ class OrganizationsController < ApplicationController
 
     respond_to do |format|
       if @organization.save
-        format.html do
-          redirect_to @organization,
-                      notice: 'Organization was successfully created.'
-        end
+        format.html { redirect_to @organization, notice: 'Organization was successfully created.' }
         format.json { render :show, status: :created, location: @organization }
       else
         format.html { render :new }
-        format.json do
-          render json: @organization.errors,
-                 status: :unprocessable_entity
-        end
+        format.json { render json: @organization.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -66,10 +60,7 @@ class OrganizationsController < ApplicationController
   def destroy
     @organization.update(active: false)
     respond_to do |format|
-      format.html do
-        redirect_to organizations_url,
-                    notice: 'Organization was successfully destroyed.'
-      end
+      format.html { redirect_to organizations_url, notice: 'Organization was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
