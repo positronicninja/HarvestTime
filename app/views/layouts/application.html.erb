@@ -9,6 +9,11 @@
   </head>
 
   <body>
-    <%= yield %>
+    <%= render '/layouts/navigation' %>
+    <p id="notice"><%= notice %></p>
+
+    <%= content_tag :div, class: 'container' do %>
+      <%= yield %>
+    <% end %>
   </body>
 </html>

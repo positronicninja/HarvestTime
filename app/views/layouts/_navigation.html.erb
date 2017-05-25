@@ -1,0 +1,18 @@
+<nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="#">TimeSheets</a>
+
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+    <ul class="navbar-nav mr-auto mt-2 mt-md-0">
+      <% params_id = params[:id] %>
+      <li class="nav-item <%= 'active' if request.controller_class == ProjectsController %>">
+        <%= link_to 'Projects', projects_path, class: 'nav-link' %>
+      </li>
+      <li class="nav-item <%= 'active' if request.controller_class == OrganizationsController %>">
+        <%= link_to 'Organizations', organizations_path, class: 'nav-link' %>
+      </li>
+    </ul>
+  </div>
+</nav>
