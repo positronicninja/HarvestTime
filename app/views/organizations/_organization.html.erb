@@ -10,8 +10,10 @@
     <%= organization.active ? 'active' : 'disabled' %>
   <% end %>
   <%= content_tag :div, class: 'col-sm-3 col-md-5' do %>
-    <%= link_to 'Details', organization_path(organization), class: 'btn btn-sm btn-primary' %>
-    <%= link_to 'Edit', edit_organization_path(organization), class: 'btn btn-sm btn-secondary' %>
-    <%= link_to 'Update Projects', organization_path(organization), method: :put, class: 'btn btn-sm btn-secondary' %>
+    <%= content_tag :div, class: 'btn-group' do %>
+      <%= link_to 'Details', organization_path(organization), class: 'btn btn-sm btn-primary' %>
+      <%= link_to 'Edit', edit_organization_path(organization), class: 'btn btn-sm btn-secondary' %>
+      <%= link_to 'Fetch from Harvest', organization_path(organization), method: :put, class: 'btn btn-sm btn-secondary' %>
+    <% end %>
   <% end %>
 <% end %>
