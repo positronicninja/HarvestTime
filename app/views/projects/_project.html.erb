@@ -6,9 +6,6 @@
   <%= content_tag :div, class: 'col-sm-4 col-md-2' do %>
     <%= pluralize(project.entries.sum(&:hours), 'Hour') %>
   <% end %>
-  <%= content_tag :div, class: 'col-sm-1 hidden-md-down' do %>
-    <%= project.active ? 'active' : 'disabled' %>
-  <% end %>
   <%= content_tag :div, class: 'col-sm-3 col-md-5' do %>
     <%= content_tag :div, class: 'btn-group' do %>
       <%= link_to 'Update Data', project_path(project), method: :put, class: 'btn btn-sm btn-primary' %>
