@@ -1,6 +1,19 @@
-<h1>Editing Organization</h1>
+<%= content_tag :div, class: 'row' do %>
+  <%= content_tag :h2, class: 'col-12' do %>
+    Editing <%= @organization.name %>
+  <% end %>
+<% end %>
 
-<%= render 'form', organization: @organization %>
 
-<%= link_to 'Show', @organization %> |
-<%= link_to 'Back', organizations_path %>
+<%= content_tag :div, class: 'row' do %>
+  <%= content_tag :div, class: 'col-12' do %>
+
+    <% unless @error.is_a?(Hash) && @error['errorcode'] %>
+      <%= render 'form', organization: @organization %>
+    <% else %>
+      <%= @error['message'] %>
+    <% end %>
+
+  <% end %>
+<% end %>
+

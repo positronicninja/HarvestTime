@@ -1,34 +1,37 @@
-<p id="notice"><%= notice %></p>
+<%= content_tag :div, class: 'row' do %>
+  <%= content_tag :h2, class: 'col-12' do %>
+    Project: <%= @project.name %>
+  <% end %>
+<% end %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @project.name %>
-</p>
+<%= content_tag :div, class: 'row' do %>
+  <%= content_tag :div, class: 'col-6' do %>
+    <%= content_tag :div, class: 'row' do %>
+      <%= content_tag :h3, class: 'col-12' do %>
+        Details
+      <% end %>
+    <% end %>
+    <%= content_tag :div, class: 'row' do %>
+      <%= content_tag :div, class: 'col-12' do %>
+        Active: <%= @project.active %>
+      <% end %>
+    <% end %>
+    <%= content_tag :div, class: 'row' do %>
+      <%= content_tag :div, class: 'col-12' do %>
+        <% total_hours = @project.entries.sum(&:hours) %>
+        <%= 'Total Hour'.pluralize(total_hours) %>: <%= total_hours %>
+      <% end %>
+    <% end %>
+    <%= content_tag :div, class: 'row' do %>
+      <%= content_tag :div, class: 'col-12' do %>
+        Staff Count: <%= @project.staff.size %>
+      <% end %>
+    <% end %>
+    <%= content_tag :div, class: 'row' do %>
+      <%= content_tag :div, class: 'col-12' do %>
+        Last Update: <%= @project.harvest_updated_at %>
+      <% end %>
+    <% end %>
+  <% end %>
 
-<p>
-  <strong>Active:</strong>
-  <%= @project.active %>
-</p>
-
-<p>
-  <strong>Organization:</strong>
-  <%= @project.organization %>
-</p>
-
-<p>
-  <strong>Harvest:</strong>
-  <%= @project.harvest_id %>
-</p>
-
-<p>
-  <strong>Harvest created at:</strong>
-  <%= @project.harvest_created_at %>
-</p>
-
-<p>
-  <strong>Harvest updated at:</strong>
-  <%= @project.harvest_updated_at %>
-</p>
-
-<%= link_to 'Edit', edit_project_path(@project) %> |
-<%= link_to 'Back', projects_path %>
+<% end %>

@@ -1,35 +1,21 @@
-<p id="notice"><%= notice %></p>
+<%= content_tag :div, class: 'col-12' do %>
+  <% unless @error.is_a?(Hash) && @error['errorcode'] %>
+    <% unless @organizations.empty? %>
 
-<h1>Organizations</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Base uri</th>
-      <th>Full domain</th>
-      <th>Harvest OAuth Client ID</th>
-      <th>Active</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @organizations.each do |organization| %>
-      <tr>
-        <td><%= organization.name %></td>
-        <td><%= organization.base_uri %></td>
-        <td><%= organization.full_domain %></td>
-        <td><%= organization.harvest_id %></td>
-        <td><%= organization.active %></td>
-        <td><%= link_to 'Show', organization %></td>
-        <td><%= link_to 'Edit', edit_organization_path(organization) %></td>
-        <td><%= link_to 'Destroy', organization, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <%= content_tag :div, class: 'row' do %>
+        <h2 class='col-12' id='organizations'>Organizations</h2>
+      <% end %>
+      <%= render partial: 'organization', collection: @organizations %>
     <% end %>
-  </tbody>
-</table>
+  <% else %>
+    <%= content_tag :div, class: 'row' do %>
+      <%= content_tag :div, class: 'col-xs-12' do %>
+        <%= @error['message'] %>
+      <% end %>
+    <% end %>
+  <% end %>
 
-<br>
+  <%= content_tag :br %>
+  <%= link_to 'New Organization', new_organization_path, class: 'btn btn-secondary' %>
+<% end %>
 
-<%= link_to 'New Organization', new_organization_path %>

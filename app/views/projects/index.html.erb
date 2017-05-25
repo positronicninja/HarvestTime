@@ -1,37 +1,18 @@
-<p id="notice"><%= notice %></p>
 
-<h1>Projects</h1>
+<%= content_tag :div, class: 'col-12' do %>
+  <% unless @error.is_a?(Hash) && @error['errorcode'] %>
+    <% unless @projects.empty? %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Active</th>
-      <th>Organization</th>
-      <th>Harvest</th>
-      <th>Harvest created at</th>
-      <th>Harvest updated at</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @projects.each do |project| %>
-      <tr>
-        <td><%= project.name %></td>
-        <td><%= project.active %></td>
-        <td><%= project.organization %></td>
-        <td><%= project.harvest_id %></td>
-        <td><%= project.harvest_created_at %></td>
-        <td><%= project.harvest_updated_at %></td>
-        <td><%= link_to 'Show', project %></td>
-        <td><%= link_to 'Edit', edit_project_path(project) %></td>
-        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <%= content_tag :div, class: 'row' do %>
+        <h2 class='col-12' id='projects'>Projects</h2>
+      <% end %>
+      <%= render partial: 'project', collection: @projects %>
     <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Project', new_project_path %>
+  <% else %>
+    <%= content_tag :div, class: 'row' do %>
+      <%= content_tag :div, class: 'col-xs-12' do %>
+        <%= @error['message'] %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

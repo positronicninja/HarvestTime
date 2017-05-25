@@ -1,47 +1,43 @@
-<%= form_with(model: organization, local: true) do |form| %>
-  <% if organization.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(organization.errors.count, "error") %> prohibited this organization from being saved:</h2>
 
-      <ul>
-      <% organization.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
+  <%= form_with(model: organization, local: true) do |form| %>
+    <% if organization.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(organization.errors.count, "error") %> prohibited this organization from being saved:</h2>
+
+        <ul>
+        <% organization.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <%= content_tag :div, class: 'row field' do %>
+      <%= form.label :name, class: 'col-4 col-sm-5' %>
+      <%= form.text_field :name, id: :organization_name, class: 'col-8 col-sm-7' %>
+    <% end %>
+
+    <%= content_tag :div, class: 'row field' do %>
+      <%= form.label 'Sub-domain', class: 'col-4 col-sm-5'  %>
+      <%= form.text_field :full_domain, id: :organization_full_domain, class: 'col-8 col-sm-7' %>
+    <% end %>
+
+    <%= content_tag :div, class: 'row field' do %>
+      <%= form.label 'Harvest ENV id' , class: 'col-4 col-sm-5' %>
+      <%= form.text_field :harvest_id, id: :organization_harvest_id, class: 'col-8 col-sm-7' %>
+    <% end %>
+
+    <%= content_tag :div, class: 'row field' do %>
+      <%= form.label 'Harvest ENV key' , class: 'col-4 col-sm-5' %>
+      <%= form.text_field :harvest_key, id: :organization_harvest_key, class: 'col-8 col-sm-7' %>
+    <% end %>
+
+    <%= content_tag :div, class: 'row field' do %>
+      <%= form.label :active, class: 'col-4 col-sm-5'  %>
+      <%= form.check_box :active, id: :organization_active, class: 'col-8 col-sm-7' %>
+    <% end %>
+
+    <%= content_tag :div, class: 'actions field' do %>
+      <%= form.submit(class: 'btn btn-primary') %>
+    <% end %>
   <% end %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name, id: :organization_name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :base_uri %>
-    <%= form.text_field :base_uri, id: :organization_base_uri %>
-  </div>
-
-  <div class="field">
-    <%= form.label :full_domain %>
-    <%= form.text_field :full_domain, id: :organization_full_domain %>
-  </div>
-
-  <div class="field">
-    <%= form.label 'Harvest OAuth Client ID' %>
-    <%= form.text_field :harvest_id, id: :organization_harvest_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :harvest_key %>
-    <%= form.text_field :harvest_key, id: :organization_harvest_key %>
-  </div>
-
-  <div class="field">
-    <%= form.label :active %>
-    <%= form.check_box :active, id: :organization_active %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>

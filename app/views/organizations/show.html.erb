@@ -1,29 +1,58 @@
-<p id="notice"><%= notice %></p>
+<%= content_tag :div, class: 'row' do %>
+  <%= content_tag :h2, class: 'col-12' do %>
+    <%= @organization.name %>
+  <% end %>
+<% end %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @organization.name %>
-</p>
+<%= content_tag :div, class: 'row' do %>
+  <%= content_tag :div, class: 'col-6' do %>
+    <%= content_tag :div, class: 'row' do %>
+      <%= content_tag :h3, class: 'col-12' do %>
+        Details
+        <%= link_to 'Edit', edit_organization_path(@organization), class: 'btn btn-sm btn-secondary' %>
+      <% end %>
+    <% end %>
+    <%= content_tag :div, class: 'row' do %>
+      <%= link_to 'Harvest Account', "https://#{@organization.full_domain}.harvestapp.com",
+          class: 'col-12' %>
+    <% end %>
+    <%= content_tag :div, class: 'row' do %>
+      <%= content_tag :div, class: 'col-12' do %>
+        Active: <%= @organization.active %>
+      <% end %>
+    <% end %>
+    <%= content_tag :div, class: 'row' do %>
+      <%= content_tag :div, class: 'col-12' do %>
+        Harvest ENV id: '<%= @organization.harvest_id %>'
+      <% end %>
+    <% end %>
+    <%= content_tag :div, class: 'row' do %>
+      <%= content_tag :div, class: 'col-12' do %>
+        Harvest ENV key: '<%= @organization.harvest_key %>'
+      <% end %>
+    <% end %>
+  <% end %>
 
-<p>
-  <strong>Base uri:</strong>
-  <%= @organization.base_uri %>
-</p>
+  <%= content_tag :div, class: 'col-6' do %>
+    <%= content_tag :div, class: 'row' do %>
+      <%= content_tag :h3, class: 'col-12' do %>
+        Projects
+        <%= link_to 'Update all', organization_path(@organization), method: :put, class: 'btn btn-sm btn-secondary' %>
+      <% end %>
+    <% end %>
+    <% @organization.projects.each do |project| %>
+      <%= content_tag :div, class: 'row' do %>
+        <%= content_tag :div, class: 'col-sm-8' do %>
+          <%= project.name %>
+        <% end %>
+        <%= content_tag :div, class: 'col-sm-4' do %>
+          <%= content_tag :div, class: 'btn-group' do %>
+            <%= link_to 'Show', project_path(project), class: 'btn btn-sm btn-primary justify-content-end' %>
+            <%= link_to 'Update', project_path(project), method: :put, class: 'btn btn-sm btn-secondary justify-content-end' %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
 
-<p>
-  <strong>Full domain:</strong>
-  <%= @organization.full_domain %>
-</p>
-
-<p>
-  <strong>Harvest OAuth Client ID:</strong>
-  <%= @organization.harvest_id %>
-</p>
-
-<p>
-  <strong>Active:</strong>
-  <%= @organization.active %>
-</p>
-
-<%= link_to 'Edit', edit_organization_path(@organization) %> |
-<%= link_to 'Back', organizations_path %>

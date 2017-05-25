@@ -1,0 +1,17 @@
+<%= content_tag :div, class: 'row' do %>
+
+  <%= content_tag :div, class: 'col-sm-2' do %>
+    <%= link_to organization.name, organization_path(organization) %>
+  <% end %>
+  <%= content_tag :div, class: 'col-sm-6 col-md-4' do %>
+    <%= link_to "#{organization.full_domain}.harvestapp.com" %>
+  <% end %>
+  <%= content_tag :div, class: 'col-sm-1 hidden-sm-down' do %>
+    <%= organization.active ? 'active' : 'disabled' %>
+  <% end %>
+  <%= content_tag :div, class: 'col-sm-3 col-md-5' do %>
+    <%= link_to 'Details', organization_path(organization), class: 'btn btn-sm btn-primary' %>
+    <%= link_to 'Edit', edit_organization_path(organization), class: 'btn btn-sm btn-secondary' %>
+    <%= link_to 'Update Projects', organization_path(organization), method: :put, class: 'btn btn-sm btn-secondary' %>
+  <% end %>
+<% end %>
