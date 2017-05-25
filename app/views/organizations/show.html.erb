@@ -37,7 +37,7 @@
     <%= content_tag :div, class: 'row' do %>
       <%= content_tag :h3, class: 'col-12' do %>
         Projects
-        <%= link_to 'Update all', organization_path(@organization), method: :put, class: 'btn btn-sm btn-secondary' %>
+        <%= link_to 'Fetch from Harvest', organization_path(@organization), method: :put, class: 'btn btn-sm btn-secondary' %>
       <% end %>
     <% end %>
     <% @organization.projects.each do |project| %>
@@ -47,8 +47,8 @@
         <% end %>
         <%= content_tag :div, class: 'col-sm-4' do %>
           <%= content_tag :div, class: 'btn-group' do %>
-            <%= link_to 'Show', project_path(project), class: 'btn btn-sm btn-primary justify-content-end' %>
-            <%= link_to 'Update', project_path(project), method: :put, class: 'btn btn-sm btn-secondary justify-content-end' %>
+            <%= link_to 'Show', project_path(project.collaboration), class: 'btn btn-sm btn-primary justify-content-end' %>
+            <%= link_to 'Pull Harvest Data', project_path(project.collaboration), method: :put, class: 'btn btn-sm btn-secondary justify-content-end' %>
           <% end %>
         <% end %>
       <% end %>
