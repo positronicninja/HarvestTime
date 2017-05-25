@@ -9,11 +9,7 @@
     <%= content_tag :div, class: 'row' do %>
       <%= content_tag :h3, class: 'col-12' do %>
         Details
-      <% end %>
-    <% end %>
-    <%= content_tag :div, class: 'row' do %>
-      <%= content_tag :div, class: 'col-12' do %>
-        Active: <%= @project.active %>
+        <%= link_to 'Pull Harvest Data', project_path(@project), method: :put, class: 'btn btn-sm btn-primary justify-content-end' %>
       <% end %>
     <% end %>
     <%= content_tag :div, class: 'row' do %>
@@ -27,11 +23,5 @@
         Staff Count: <%= @project.staff.size %>
       <% end %>
     <% end %>
-    <%= content_tag :div, class: 'row' do %>
-      <%= content_tag :div, class: 'col-12' do %>
-        Last Update: <%= @project.harvest_updated_at %>
-      <% end %>
-    <% end %>
   <% end %>
-
 <% end %>
