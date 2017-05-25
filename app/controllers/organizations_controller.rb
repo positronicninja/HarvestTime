@@ -47,18 +47,16 @@ class OrganizationsController < ApplicationController
   # PATCH/PUT /organizations/1.json
   def update
     respond_to do |format|
-      if @organization.update(organization_params)
-        format.html do
-          redirect_to @organization,
-                      notice: 'Organization was successfully updated.'
-        end
+      if params[:organization] && @organization.update(organization_params)
+        format.html { redirect_to @organization, notice: 'Organization was successfully updated.' }
         format.json { render :show, status: :ok, location: @organization }
-      else
+      elsif @organization.errors.any?
         format.html { render :edit }
-        format.json do
-          render json: @organization.errors,
-                 status: :unprocessable_entity
-        end
+        format.json { render json: @organization.errors, status: :unprocessable_entity }
+      else
+        @organization.update_via_api
+        format.html { redirect_to organizations_path, notice: 'Fetching Projects from Harvest.' }
+        format.json { render :show, status: :ok, location: @organization }
       end
     end
   end
