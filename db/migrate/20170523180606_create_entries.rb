@@ -8,7 +8,7 @@ class CreateEntries < ActiveRecord::Migration[5.1]
       t.integer :harvest_id,          index: true
       t.integer :harvest_task_id,     index: true
       t.integer :harvest_project_id,  index: true
-      t.datetime :harvest_spent_at
+      t.datetime :harvest_spent_on
       t.datetime :harvest_created_at
       t.datetime :harvest_updated_at
 
