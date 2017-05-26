@@ -1,6 +1,6 @@
 class Collaboration < ApplicationRecord
   has_many :projects,       dependent: :destroy
-  has_many :entries,        through: :projects, dependent: :destroy
+  has_many :entries,        through: :projects
   has_many :organizations,  through: :projects
   has_many :staff, -> { distinct.group 'organization_id' }, through: :entries
   has_many :tasks, -> { distinct },                         through: :projects
