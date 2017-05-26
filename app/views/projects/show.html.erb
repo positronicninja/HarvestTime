@@ -33,7 +33,9 @@
     <% @project.organizations.each do |org| %>
       <%= content_tag :div, class: 'row' do %>
         <%= content_tag :div, class: 'col-6' do %>
-          <%= org.name %> - <%= @project.projects.find_by(organization: org).harvest_updated_at.to_date %>
+          <%= org.name %> -
+          <%= @project.projects.find_by(organization: org).entries
+                      .last_update.first.harvest_updated_at.to_date %>
         <% end %>
         <%= content_tag :div, class: 'col-6' do %>
         <%= pluralize(@project.entries.by_organization(org).sum(&:hours), 'Hour') %>
