@@ -10,6 +10,7 @@ class Entry < ApplicationRecord
   scope :by_staff, ->(staff) { where(staff: staff) }
   scope :by_organization, ->(org) { joins(:project).where(projects: { organization: org }) }
   scope :by_task, ->(task) { joins(:organization_task).where(organization_tasks: { task: task }) }
+  scope :last_update, -> { order('harvest_updated_at desc') }
 
   def self.update_data_for_project(data: nil, proj: nil)
     raise 'Missing Harvest Entry Data' if data.nil? || proj.nil?
