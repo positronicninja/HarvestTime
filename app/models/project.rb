@@ -1,6 +1,7 @@
 class Project < ApplicationRecord
   has_many :entries, dependent: :destroy
   has_many :staff, -> { distinct.group 'organization_id' }, through: :entries
+  belongs_to :client
   belongs_to :organization
   belongs_to :collaboration
 
@@ -10,6 +11,8 @@ class Project < ApplicationRecord
                                 harvest_id:   data[:id]) do |new_project|
       new_project.name = data[:name]
       new_project.collaboration = Collaboration.find_or_create_by(name: data[:name])
+      new_project.client = Client.find_or_create_with(harvest_id: data[:client_id],
+                                                      org:        org)
     end
     project.update_data_from_api(data)
   end

@@ -1,5 +1,6 @@
 class Organization < ApplicationRecord
   has_many :projects
+  has_many :clients
   has_many :staff
 
   def harvesting

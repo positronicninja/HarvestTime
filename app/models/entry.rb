@@ -1,5 +1,6 @@
 class Entry < ApplicationRecord
   belongs_to :staff
+  belongs_to :client
   belongs_to :project
   has_one :organization, through: :project
 
@@ -8,6 +9,7 @@ class Entry < ApplicationRecord
     entry = find_or_create_by(project:    proj,
                               harvest_id: data[:id]) do |new_entry|
       new_entry.staff = Staff.find_or_create_by(harvest_id: data[:user_id],
+      new_entry.client = proj.client
                                                 organization: proj.organization)
     end
     entry.update_data_from_api(data)
@@ -16,7 +18,6 @@ class Entry < ApplicationRecord
   def update_data_from_api(data = nil)
     data ||= api_data
     raise 'Missing Harvest Entry Data' if data.nil?
-    update(
       harvest_task_id:    data[:task_id],
       harvest_project_id: data[:project_id],
       notes:              data[:notes],
@@ -25,6 +26,7 @@ class Entry < ApplicationRecord
       harvest_created_at: data[:created_at],
       harvest_updated_at: data[:updated_at]
     )
+    update(client:             project.client,
   end
 
   private
