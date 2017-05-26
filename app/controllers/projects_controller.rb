@@ -16,8 +16,8 @@ class ProjectsController < ApplicationController
   # PATCH/PUT /projects/1.json
   def update
     respond_to do |format|
-      if @project.update_data_from_api
-        format.html { redirect_to @project, notice: 'Fetching Project data from Harvest.' }
+      if @project.update_data_from_api && @project.update_entries_from_api
+        format.html { redirect_to project_path(@project), notice: 'Fetching Project data from Harvest.' }
         format.json { render :show, status: :ok, location: @project }
       else
         format.html { render :edit }
