@@ -32,3 +32,79 @@ Build rough object graph for data (Organization, Project, Task, & supporting mod
 * Deployment instructions
 
 * ...
+## Model Design
+
+* Organization 
+    - Attributes
+        + name 
+        + active
+        + uri
+        + domain
+        + credential references in ENV
+    - Relationships
+        + has many Tasks
+        + has many CommonTasks through Tasks
+        + has many Projects
+        + has many Staff
+* Project
+    - Attributes
+        + name 
+        + active
+        + harvest_id
+        + harvest_created_at
+        + harvest_updated_at
+    - Relationships
+        + belongs to Organization
+        + has many Entries
+        + has many Staff through Entries
+* Entry
+    -  Attributes
+        +  hours
+        +  harvest_id
+        +  harvest_created_at
+        +  harvest_updated_at
+        +  harvest_task_id
+        +  harvest_project_id
+        +  notes
+    -  Relationships
+        +  belongs to Staff
+        +  belongs to Task
+        +  belongs to CommonTask through Task
+* CommonTask 
+    - Attributes
+        + name 
+    - Relationships 
+        + has many Tasks
+* Task 
+    -  Attributes
+        +  name
+        +  harvest_id
+        +  harvest_deactivated
+    -  Relationships
+        +  belongs to Organization
+* Collaboration # (JointProject ?)
+    -  Attributes
+        +  name
+    -  Relationships
+        +  has many Projects
+        +  has many Entries through Projects
+        +  has many Staff through Projects
+* Staff 
+    -  Attributes 
+        +  first_name
+        +  last_name
+        +  email
+        +  active 
+        +  harvest_id 
+        +  harvest_created_at
+        +  harvest_updated_at
+    -  Relationships
+        +  belongs to Organization
+        +  has many Entries
+
+
+## Routing
+
+resources :projects, except: :destroy # references Collaborations
+resources :organizations, only: [:index, :show, :update, :destroy]
+
