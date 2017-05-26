@@ -16,6 +16,7 @@ class Project < ApplicationRecord
       new_project.client = Client.find_or_create_with(harvest_id: data[:client_id],
                                                       org:        org)
     end
+    raise 'Unable to save Project' unless project.persisted?
     project.update_data_from_api(data)
   end
 
