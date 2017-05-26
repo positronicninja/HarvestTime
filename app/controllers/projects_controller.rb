@@ -4,7 +4,7 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.all
+    @projects = Collaboration.all
   end
 
   # GET /projects/1
@@ -39,6 +39,7 @@ class ProjectsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_project
-      @project = Project.find(params[:id])
+      @project = Collaboration.includes(:staff, :tasks, :organizations)
+                              .find(params[:id])
     end
 end
