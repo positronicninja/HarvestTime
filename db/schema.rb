@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170523180606) do
+ActiveRecord::Schema.define(version: 20170525220831) do
+
+  create_table "clients", force: :cascade do |t|
+    t.string "name"
+    t.integer "organization_id"
+    t.integer "harvest_id"
+    t.datetime "harvest_created_at"
+    t.datetime "harvest_updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_clients_on_organization_id"
+  end
 
   create_table "collaborations", force: :cascade do |t|
     t.string "name"
@@ -22,7 +33,9 @@ ActiveRecord::Schema.define(version: 20170523180606) do
     t.string "notes"
     t.decimal "hours", precision: 8, scale: 2
     t.integer "staff_id"
+    t.integer "client_id"
     t.integer "project_id"
+    t.integer "organization_task_id"
     t.integer "harvest_id"
     t.integer "harvest_task_id"
     t.integer "harvest_project_id"
@@ -31,11 +44,26 @@ ActiveRecord::Schema.define(version: 20170523180606) do
     t.datetime "harvest_updated_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_entries_on_client_id"
     t.index ["harvest_id"], name: "index_entries_on_harvest_id"
     t.index ["harvest_project_id"], name: "index_entries_on_harvest_project_id"
     t.index ["harvest_task_id"], name: "index_entries_on_harvest_task_id"
+    t.index ["organization_task_id"], name: "index_entries_on_organization_task_id"
     t.index ["project_id"], name: "index_entries_on_project_id"
     t.index ["staff_id"], name: "index_entries_on_staff_id"
+  end
+
+  create_table "organization_tasks", force: :cascade do |t|
+    t.string "name"
+    t.integer "organization_id"
+    t.integer "task_id"
+    t.integer "harvest_id"
+    t.datetime "harvest_created_at"
+    t.datetime "harvest_updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_organization_tasks_on_organization_id"
+    t.index ["task_id"], name: "index_organization_tasks_on_task_id"
   end
 
   create_table "organizations", force: :cascade do |t|
@@ -52,15 +80,17 @@ ActiveRecord::Schema.define(version: 20170523180606) do
   create_table "projects", force: :cascade do |t|
     t.string "name"
     t.boolean "active"
+    t.integer "client_id"
     t.integer "organization_id"
-    t.integer "collaborations_id"
+    t.integer "collaboration_id"
     t.integer "harvest_id"
     t.datetime "harvest_starts_on"
     t.datetime "harvest_created_at"
     t.datetime "harvest_updated_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["collaborations_id"], name: "index_projects_on_collaborations_id"
+    t.index ["client_id"], name: "index_projects_on_client_id"
+    t.index ["collaboration_id"], name: "index_projects_on_collaboration_id"
     t.index ["harvest_id"], name: "index_projects_on_harvest_id"
     t.index ["organization_id"], name: "index_projects_on_organization_id"
   end
@@ -78,6 +108,12 @@ ActiveRecord::Schema.define(version: 20170523180606) do
     t.datetime "updated_at", null: false
     t.index ["harvest_id"], name: "index_staffs_on_harvest_id"
     t.index ["organization_id"], name: "index_staffs_on_organization_id"
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
