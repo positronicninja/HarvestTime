@@ -50,7 +50,7 @@ class OrganizationsController < ApplicationController
         format.json { render json: @organization.errors, status: :unprocessable_entity }
       else
         @organization.update_projects_from_api
-        format.html { redirect_to organizations_path, notice: 'Fetching Projects from Harvest.' }
+        format.html { redirect_to @organization, notice: 'Fetching Projects from Harvest.' }
         format.json { render :show, status: :ok, location: @organization }
       end
     end
