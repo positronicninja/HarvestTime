@@ -2,7 +2,9 @@ class Organization < ApplicationRecord
   has_many :projects
   has_many :clients
   has_many :staff
+  has_many :organization_tasks
   has_many :collaborations, through: :projects
+  has_many :tasks,          through: :organization_tasks
 
   def harvesting
     @harvesting ||= connect_to_api
