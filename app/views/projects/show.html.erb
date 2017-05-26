@@ -78,3 +78,55 @@
     <% end %>
   <% end %>
 <% end %>
+
+<%= content_tag :hr %>
+<%= content_tag :div, class: 'row' do %>
+  <%= content_tag :h4, class: 'col-3' do %>
+    Client
+  <% end %>
+  <%= content_tag :h4, class: 'col-3' do %>
+    Project
+  <% end %>
+  <%= content_tag :h4, class: 'col-3' do %>
+    Task
+  <% end %>
+  <%= content_tag :h4, class: 'col-2' do %>
+    Person
+  <% end %>
+  <%= content_tag :h4, class: 'col-1' do %>
+    Hours
+  <% end %>
+<% end %>
+
+<% @project.entries.group_by(&:harvest_spent_on).each do |day| %>
+  <%= content_tag :div, class: 'row' do %>
+    <%= content_tag :h5, class: 'col-11' do %>
+      <%= day[0].to_date %>
+    <% end %>
+    <%= content_tag :h5, class: 'col-1' do %>
+      <%= day[1].sum(&:hours) %>
+    <% end %>
+  <% end %>
+  <% day[1].group_by(&:staff).each do |entry| %>
+    <%= content_tag :div, class: 'row' do %>
+      <%= content_tag :div, class: 'col-3' do %>
+        <%= entry[1].first.client.name %>
+      <% end %>
+      <%= content_tag :div, class: 'col-3' do %>
+        <%= @project.name %>
+      <% end %>
+      <%= content_tag :div, class: 'col-3' do %>
+        <%= entry[1].first.task.name %>
+      <% end %>
+      <%= content_tag :div, class: 'col-2' do %>
+        <%= entry[0].fullname %>
+      <% end %>
+      <%= content_tag :div, class: 'col-1' do %>
+        <%= entry[1].sum(&:hours) %>
+      <% end %>
+    <% end %>
+  <% end %>
+  <%= content_tag :hr %>
+<% end %>
+
+
