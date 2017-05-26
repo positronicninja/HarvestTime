@@ -7,6 +7,10 @@ class Entry < ApplicationRecord
   has_one :collaboration, through: :project
   has_one :task,          through: :organization_task
 
+  scope :by_staff, ->(staff) { where(staff: staff) }
+  scope :by_organization, ->(org) { joins(:project).where(projects: { organization: org }) }
+  scope :by_task, ->(task) { joins(:organization_task).where(organization_tasks: { task: task }) }
+
   def self.update_data_for_project(data: nil, proj: nil)
     raise 'Missing Harvest Entry Data' if data.nil? || proj.nil?
     entry = find_or_create_by(project:    proj,
