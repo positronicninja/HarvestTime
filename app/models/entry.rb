@@ -22,6 +22,7 @@ class Entry < ApplicationRecord
         OrganizationTask.find_or_create_with(harvest_id:  data[:task_id],
                                              org:         proj.organization)
     end
+    raise 'Unable to save Entry' unless entry.persisted?
     entry.update_data_from_api(data)
   end
 
