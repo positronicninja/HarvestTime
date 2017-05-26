@@ -1,15 +1,68 @@
 <%= content_tag :div, class: 'row' do %>
   <%= content_tag :h2, class: 'col-12' do %>
-    Project: <%= @project.name %>
+    <%= @project.name %>
+    <%= link_to 'Pull Harvest Data', project_path(@project), method: :put, class: 'btn btn-sm btn-secondary justify-content-end' %>
   <% end %>
 <% end %>
-
+<%= content_tag :hr %>
 <%= content_tag :div, class: 'row' do %>
   <%= content_tag :div, class: 'col-6' do %>
     <%= content_tag :div, class: 'row' do %>
       <%= content_tag :h3, class: 'col-12' do %>
-        Details
-        <%= link_to 'Pull Harvest Data', project_path(@project), method: :put, class: 'btn btn-sm btn-primary justify-content-end' %>
+        Total Time by Person
+      <% end %>
+    <% end %>
+    <% @project.staff.each do |worker| %>
+      <%= content_tag :div, class: 'row' do %>
+        <%= content_tag :div, class: 'col-6' do %>
+          <%= "#{worker.fullname} - #{worker.organization.name}" %>
+        <% end %>
+        <%= content_tag :div, class: 'col-6' do %>
+        <%= pluralize(@project.entries.by_staff(worker).sum(&:hours), 'Hour') %>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <%= content_tag :hr %>
+    <%= content_tag :div, class: 'row' do %>
+      <%= content_tag :h3, class: 'col-12' do %>
+        Total Time by Organization
+      <% end %>
+    <% end %>
+
+    <% @project.organizations.each do |org| %>
+      <%= content_tag :div, class: 'row' do %>
+        <%= content_tag :div, class: 'col-6' do %>
+          <%= org.name %>
+        <% end %>
+        <%= content_tag :div, class: 'col-6' do %>
+        <%= pluralize(@project.entries.by_organization(org).sum(&:hours), 'Hour') %>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <%= content_tag :hr %>
+    <%= content_tag :div, class: 'row' do %>
+      <%= content_tag :h3, class: 'col-12' do %>
+        Total Time by Task
+      <% end %>
+    <% end %>
+    <% @project.tasks.each do |task| %>
+      <%= content_tag :div, class: 'row' do %>
+        <%= content_tag :div, class: 'col-6' do %>
+          <%= task.name %>
+        <% end %>
+        <%= content_tag :div, class: 'col-6' do %>
+        <%= pluralize(@project.entries.by_task(task).sum(&:hours), 'Hour') %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <%= content_tag :div, class: 'col-6' do %>
+    <%= content_tag :div, class: 'row' do %>
+      <%= content_tag :h3, class: 'col-12' do %>
+        Project
       <% end %>
     <% end %>
     <%= content_tag :div, class: 'row' do %>
@@ -20,7 +73,7 @@
     <% end %>
     <%= content_tag :div, class: 'row' do %>
       <%= content_tag :div, class: 'col-12' do %>
-        Staff Count: <%= @project.staff.size %>
+        Staff: <%= @project.staff.size %>
       <% end %>
     <% end %>
   <% end %>
