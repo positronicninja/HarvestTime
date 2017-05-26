@@ -2,7 +2,8 @@ class Entry < ApplicationRecord
   belongs_to :staff
   belongs_to :client
   belongs_to :project
-  has_one :organization, through: :project
+  has_one :organization,  through: :project
+  has_one :collaboration, through: :project
 
   def self.update_data_for_project(data: nil, proj: nil)
     raise 'Missing Harvest Entry Data' if data.nil? || proj.nil?
