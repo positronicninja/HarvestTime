@@ -22,4 +22,8 @@ class Staff < ApplicationRecord
       harvest_updated_at: data[:updated_at]
     )
   end
+
+  def fullname
+    "#{first_name} #{last_name}"
+  end
 end
