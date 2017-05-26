@@ -124,20 +124,4 @@ RSpec.describe OrganizationsController, type: :controller do
     end
   end
 
-  describe "DELETE #destroy" do
-    it "destroys the requested organization" do
-      organization = Organization.create! valid_attributes
-      expect {
-        delete :destroy, params: {id: organization.to_param}, session: valid_session
-        organization.reload
-      }.to change(organization, :active).to(false)
-    end
-
-    it "redirects to the organizations list" do
-      organization = Organization.create! valid_attributes
-      delete :destroy, params: {id: organization.to_param}, session: valid_session
-      expect(response).to redirect_to(organizations_url)
-    end
-  end
-
 end

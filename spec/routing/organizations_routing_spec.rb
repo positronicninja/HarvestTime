@@ -31,9 +31,5 @@ RSpec.describe OrganizationsController, type: :routing do
       expect(:patch => "/organizations/1").to route_to("organizations#update", :id => "1")
     end
 
-    it "routes to #destroy" do
-      expect(:delete => "/organizations/1").to route_to("organizations#destroy", :id => "1")
-    end
-
   end
 end
