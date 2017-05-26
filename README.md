@@ -16,6 +16,10 @@ Build rough object graph for data (Organization, Project, Task, & supporting mod
 * Avoid pulling historical data whenever possible. Consider any data older than 48 hours to be historical. Provide a method to initiate a manual fetch on a data set.
 
 * Ruby version
+    - 2.4.1
+
+* Rails version
+    - 5.1.1
 
 * System dependencies
 
@@ -32,6 +36,9 @@ Build rough object graph for data (Organization, Project, Task, & supporting mod
 * Deployment instructions
 
 * ...
+* Gotchas
+    - Project Start On Date in Harvest Project must be earlier than entries. When importing data via CSV it is blank by default. We use the Start On date to set the default query start date.
+
 ## Model Design
 
 * Organization 
